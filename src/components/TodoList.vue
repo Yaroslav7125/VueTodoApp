@@ -1,21 +1,12 @@
 <template>
     <div class="content">
-
-        
-        
-
         <Todo 
         v-for="(todo, index) in todos"
+        v-if="todo.filterS"
         v-bind:todo='todo'
         v-bind:index='index'
-
         v-on:deleteTodo="deleteTodo"
         />
-
-
-        
-        
-        
     </div>
 </template>
 
@@ -30,10 +21,10 @@ export default{
         deleteTodo(id){
             this.$emit('deleteTodo', id);
         }
-    }
+    }, 
+    
 }
 </script>
-
 
 <style scoped>
 

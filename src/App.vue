@@ -26,20 +26,47 @@ export default {
   data(){
     return {
       todosArr:[],
-      tempSearchTodo:[],
+      searchWordApp:'',
     }
   },
   methods:{
+    search(searchWord){
+      this.searchWordApp = searchWord; 
+    },
     PushTodo(newTodo){
         this.todosArr.push(newTodo);
     },
     deleteTodo(id){
       this.todosArr = this.todosArr.filter(t=>t.id !==id);
     },
-    /* search(){
+    search(searchWord){
+      this.searchWordApp = searchWord; 
       
-    } */
-  }
+     
+    }
+  },
+  watch:{
+        searchWordApp:function(){
+      
+          if(this.searchWordApp!==''){
+            for(let todo of this.todosArr){
+              if(todo.title.indexOf(this.searchWordApp)==-1){
+                todo.filterS = false;
+              }
+              else{
+                todo.filterS = true
+              }
+            }
+          }
+          else{
+            for(let todo of this.todosArr){
+              todo.filterS = true;
+            }
+          }
+
+           
+        }
+    }
 }
 </script>
 

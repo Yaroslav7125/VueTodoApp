@@ -4,8 +4,8 @@
                 <input class='form-control' type="text" v-model='valueTodo'>
                 
                 <button v-on:click='makeTodo' class="btn btn-warning">Add</button>
-                <!-- <input class='form-control form-control-search' v-model='searchWord'  type="text" > -->
-                <!-- <button v-on:click='SearchTodo' class="btn btn-warning">Search</button> -->
+                 <input class='form-control form-control-search' v-model='searchWord' placeholder="Search..."  type="text" > 
+                <!--  <button v-on:click='SearchTodo' class="btn btn-warning">Search</button> --> 
             </div>
     </div>
 </template>
@@ -19,22 +19,24 @@ export default{
     },
     methods:{
         makeTodo(){
-          
             if(this.valueTodo){
-                
                 let strValue = this.valueTodo;
                 const NewTodo = {
                     id:Date.now(),
                     title: strValue,
                     completed:false,
+                    filterS:true,
                 }
                 this.$emit('addTodo', NewTodo);
             } 
+            this.valueTodo='';
         },
-        /* SearchTodo(){
-            this.$emit('search', this.searchWord);
-        } */
-    }
+    },
+    watch:{
+            searchWord:function(){
+                this.$emit('search', this.searchWord);
+            }
+        }
 }
 
 </script>
@@ -57,6 +59,7 @@ export default{
  }
  .form-control-search{
      width: 100px;
+     margin-right: 15px;
  }
  .btn{
      margin: 15px ;

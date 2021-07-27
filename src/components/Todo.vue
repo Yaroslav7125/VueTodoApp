@@ -52,7 +52,7 @@ export default{
     align-items: center;
     border:1px solid grey;
     margin: 5px;
-    border-radius: 3px;
+    border-radius: 8px;
  }
  .form-control{
      width: 500px;
