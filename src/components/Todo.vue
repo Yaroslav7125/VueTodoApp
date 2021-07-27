@@ -9,7 +9,6 @@
             <button class="btn btn-primary" v-on:click="ChangeEditTodos()">Edit</button>
             <button v-on:click='deleteTodo' class="btn btn-outline-dark">X</button>
         </div>
-        
     </div>
 </template>
 
