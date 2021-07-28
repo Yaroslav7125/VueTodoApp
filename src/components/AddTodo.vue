@@ -4,17 +4,20 @@
                 <input class='form-control' type="text" v-model='valueTodo'>
                 
                 <button v-on:click='makeTodo' class="btn btn-warning">Add</button>
-                 <input class='form-control form-control-search' v-model='searchWord' placeholder="Search..."  type="text" > 
+                 <input class='form-control form-control-search' :title='searchWord' @input="$emit('editSearchWord', $event.target.value)" placeholder="Search..."  type="text" >
                 <!--  <button v-on:click='SearchTodo' class="btn btn-warning">Search</button> --> 
             </div>
     </div>
 </template>
 <script>
 export default{
+  props:{
+    searchWord:String,
+  },
     data(){
         return{
             valueTodo:'',
-            searchWord:'',
+
         }
     },
     methods:{
@@ -32,11 +35,7 @@ export default{
             this.valueTodo='';
         },
     },
-    watch:{
-            searchWord:function(){
-                this.$emit('search', this.searchWord);
-            }
-        }
+
 }
 
 </script>

@@ -1,14 +1,20 @@
 <template>
   <div id="app">
-    <h1>My todo list!</h1>  
+    <h1>My todo list!</h1>
     <AddTodo
-      v-on:addTodo='PushTodo'
-      v-on:search='search'
+        v-bind:searchWord="searchWordApp"
+        v-on:editSearchWord="searchWordApp = $event"
+        v-on:addTodo='PushTodo'
+
     />
     <TodoList
-    v-bind:todos='todosArr'
-    v-on:deleteTodo="deleteTodo"
+        v-bind:todos='TheSearchWordApp'
+        v-on:deleteTodo="deleteTodo"
     />
+
+
+
+
   </div>
 </template>
 
@@ -21,53 +27,53 @@ export default {
   components: {
     TodoList,
     AddTodo
-    
-  },
-  data(){
-    return {
-      todosArr:[],
-      searchWordApp:'',
-    }
-  },
-  methods:{
-    search(searchWord){
-      this.searchWordApp = searchWord; 
-    },
-    PushTodo(newTodo){
-        this.todosArr.push(newTodo);
-    },
-    deleteTodo(id){
-      this.todosArr = this.todosArr.filter(t=>t.id !==id);
-    },
-    search(searchWord){
-      this.searchWordApp = searchWord; 
-      
-     
-    }
-  },
-  watch:{
-        searchWordApp:function(){
-      
-          if(this.searchWordApp!==''){
-            for(let todo of this.todosArr){
-              if(todo.title.indexOf(this.searchWordApp)==-1){
-                todo.filterS = false;
-              }
-              else{
-                todo.filterS = true
-              }
-            }
-          }
-          else{
-            for(let todo of this.todosArr){
-              todo.filterS = true;
-            }
-          }
 
-           
-        }
+  },
+  data() {
+    return {
+      todosArr: [],
+      searchWordApp: '',
     }
+  },
+  methods: {
+
+    PushTodo(newTodo) {
+
+      this.todosArr.push(newTodo);
+      localStorage.setItem(todosArr, JSON.stringify(this.todosArr)); // сетим в local Storage
+    },
+    deleteTodo(id) {
+      this.todosArr = this.todosArr.filter(t => t.id !== id);
+      //localStorage.setItem(todosArr, JSON.stringify(this.todosArr)); // сетим при удалении
+    },
+  },
+
+  computed: {
+    TheSearchWordApp: function () {
+      console.log(this.searchWordApp)
+      //return this.searchWordApp
+      if (this.searchWordApp != '') {
+        return this.todosArr.filter(t => t.title.includes(this.searchWordApp))
+      } else {
+        return this.todosArr.filter(t => t.title.includes(this.searchWordApp))
+      }
+
+    },
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+
+
+      if (JSON.parse(localStorage.getItem("todosArr")))
+        this.todosArr = JSON.parse(localStorage.getItem("todosArr"));// читаем
+      else localStorage.setItem(todosArr, JSON.stringify([]));
+
+      //console.log(typeof array); // объект
+      //console.log(array); // [1, 2, 3]
+    })
+  }
 }
+
 </script>
 
 <style>
