@@ -2,10 +2,8 @@
     <div class="container">
             <div class="container-inner">
                 <input class='form-control' type="text" v-model='valueTodo'>
-                
                 <button v-on:click='makeTodo' class="btn btn-warning">Add</button>
                  <input class='form-control form-control-search' :title='searchWord' @input="$emit('editSearchWord', $event.target.value)" placeholder="Search..."  type="text" >
-                <!--  <button v-on:click='SearchTodo' class="btn btn-warning">Search</button> --> 
             </div>
     </div>
 </template>
@@ -14,13 +12,12 @@ export default{
   props:{
     searchWord:String,
   },
-    data(){
+  data(){
         return{
             valueTodo:'',
-
         }
-    },
-    methods:{
+  },
+  methods:{
         makeTodo(){
             if(this.valueTodo){
                 let strValue = this.valueTodo;
@@ -28,16 +25,13 @@ export default{
                     id:Date.now(),
                     title: strValue,
                     completed:false,
-                    filterS:true,
                 }
                 this.$emit('addTodo', NewTodo);
             } 
             this.valueTodo='';
         },
-    },
-
+  },
 }
-
 </script>
 <style scoped>
 .container{

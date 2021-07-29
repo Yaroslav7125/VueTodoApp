@@ -2,10 +2,11 @@
     <div class="content">
         <Todo 
         v-for="(todo, index) in todos"
-        v-if="todo.filterS"
         v-bind:todo='todo'
         v-bind:index='index'
         v-on:deleteTodo="deleteTodo"
+        v-on:changeTodoTitle="changeTodoTitle"
+        v-on:ChangeTodoCompleted="ChangeTodoCompleted"
         />
     </div>
 </template>
@@ -18,14 +19,16 @@ export default{
         Todo:Todo
     },
     methods:{
-        deleteTodo(id){
-            this.$emit('deleteTodo', id);
-        }
-    }, 
-    
+      deleteTodo(id){
+          this.$emit('deleteTodo', id);
+      },
+      changeTodoTitle(index, StrTitle){
+                                              ///
+          this.$emit('changeTodoTitle', index, StrTitle);
+      },
+      ChangeTodoCompleted(index){
+          this.$emit('ChangeTodoCompleted', index);
+      }
+    },
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <div class="container-inner">
-                <input  class="checkbox" v-on:click='changeCompleted(todo)' type="checkbox" name="" id="">
-            <h2 v-bind:class='{done: completed}' v-if='!editTodo'>
+                <input v-bind:checked="todo.completed" class="checkbox" v-on:click='changeCompleted' type="checkbox" >
+            <h2 v-bind:class='{done: this.todo.completed}' v-if='!editTodo'>
                  {{(index+1) + ' '+ todo.title}}
             </h2>
-            <input class='form-control' v-else type="text" v-model="todo.title">
+            <input class='form-control' v-bind:value="todo.title" v-else type="text" v-on:input="changeTodoTitle($event.target.value) " >
             <button class="btn btn-primary" v-on:click="ChangeEditTodos()">Edit</button>
             <button v-on:click='deleteTodo' class="btn btn-outline-dark">X</button>
         </div>
@@ -17,22 +17,22 @@ export default{
     props:['todo', 'index'],
     data(){
         return{
-            editTodo:false,
-            completed: false,
+          editTodo:false,
         }
     },
     methods:{
         ChangeEditTodos(){
-            this.editTodo= !this.editTodo;
-            
+          this.editTodo= !this.editTodo;
+          this.$emit('ChangeTodo');
         }, 
-        changeCompleted(todo){
-            todo.completed = !todo.completed;
-            this.completed = !this.completed
+        changeCompleted(){
+          this.$emit('ChangeTodoCompleted', this.index);
+        },
+        changeTodoTitle(StrTitle){
+          this.$emit('changeTodoTitle', this.index, StrTitle)
         },
         deleteTodo(){
-            
-            this.$emit('deleteTodo', this.todo.id)
+          this.$emit('deleteTodo', this.todo.id)
         }
     }
 }
@@ -43,15 +43,12 @@ export default{
      display: flex;
      justify-content: center; 
  }
- .input{
-     text-align: center;
- }
  .container-inner{
-     display: flex;
-    align-items: center;
-    border:1px solid grey;
-    margin: 5px;
-    border-radius: 8px;
+   display: flex;
+   align-items: center;
+   border:1px solid grey;
+   margin: 5px;
+   border-radius: 8px;
  }
  .form-control{
      width: 500px;
@@ -64,7 +61,7 @@ export default{
  }
  .checkbox{
      margin: 15px;
-    width: 100px;
+     width: 100px;
  }
  .done{
      text-decoration: line-through;

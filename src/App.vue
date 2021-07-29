@@ -5,16 +5,13 @@
         v-bind:searchWord="searchWordApp"
         v-on:editSearchWord="searchWordApp = $event"
         v-on:addTodo='PushTodo'
-
     />
     <TodoList
         v-bind:todos='TheSearchWordApp'
         v-on:deleteTodo="deleteTodo"
+        v-on:ChangeTodoCompleted="ChangeTodoCompleted"
+        v-on:changeTodoTitle="changeTodoTitle"
     />
-
-
-
-
   </div>
 </template>
 
@@ -26,50 +23,58 @@ export default {
   name: 'App',
   components: {
     TodoList,
-    AddTodo
-
+    AddTodo,
   },
   data() {
     return {
-      todosArr: [],
+      todosArr: [
+        { id:1,title:'купить хлеп', completed: false},
+        { id:2,title:'купить матрас', completed: false},
+        { id:3,title:'купить сено', completed: false},
+      ],
       searchWordApp: '',
     }
   },
   methods: {
-
+    SetToLocalStorage() {
+      localStorage.setItem('todosArr', JSON.stringify(this.todosArr));
+    },
     PushTodo(newTodo) {
-
       this.todosArr.push(newTodo);
-      localStorage.setItem(todosArr, JSON.stringify(this.todosArr)); // сетим в local Storage
+      this.SetToLocalStorage() // сетим в local Storage
     },
     deleteTodo(id) {
       this.todosArr = this.todosArr.filter(t => t.id !== id);
-      //localStorage.setItem(todosArr, JSON.stringify(this.todosArr)); // сетим при удалении
+      this.SetToLocalStorage(); //сетим в local Storage
     },
+
+    ChangeTodoCompleted(index) {
+      this.todosArr[index].completed = !this.todosArr[index].completed;
+      this.SetToLocalStorage(); // сетим при изм completed
+    },
+    changeTodoTitle(index, StrTitle){
+      this.todosArr[index].title = StrTitle;
+      this.SetToLocalStorage();// сетим при изменении title
+    }
   },
 
   computed: {
     TheSearchWordApp: function () {
-      console.log(this.searchWordApp)
-      //return this.searchWordApp
+
       if (this.searchWordApp != '') {
         return this.todosArr.filter(t => t.title.includes(this.searchWordApp))
       } else {
-        return this.todosArr.filter(t => t.title.includes(this.searchWordApp))
+        return this.todosArr;
       }
-
     },
   },
   mounted: function () {
     this.$nextTick(function () {
 
-
-      if (JSON.parse(localStorage.getItem("todosArr")))
+      if (JSON.parse(localStorage.getItem("todosArr"))) {
         this.todosArr = JSON.parse(localStorage.getItem("todosArr"));// читаем
-      else localStorage.setItem(todosArr, JSON.stringify([]));
-
-      //console.log(typeof array); // объект
-      //console.log(array); // [1, 2, 3]
+      }
+      else localStorage.setItem('todosArr', JSON.stringify(this.todosArr));
     })
   }
 }
