@@ -2,7 +2,7 @@
     <div class="container">
             <div class="container-inner">
                 <input class='form-control' type="text" v-model='valueTodo'>
-                <button v-on:click='makeTodo' class="btn btn-warning">Add</button>
+                <button v-on:click='createTodo' class="btn btn-warning">Add</button>
                  <input class='form-control form-control-search' :title='userInput' @input="$emit('updateUserInput', $event.target.value)" placeholder="Search..." type="text" >
             </div>
     </div>
@@ -18,7 +18,7 @@ export default{
         }
   },
   methods:{
-        makeTodo(){
+        createTodo(){
             if(this.valueTodo){
                 const NewTodo = {
                     id:Date.now(),
