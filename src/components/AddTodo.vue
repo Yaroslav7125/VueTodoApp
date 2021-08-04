@@ -20,10 +20,9 @@ export default{
   methods:{
         makeTodo(){
             if(this.valueTodo){
-                let strValue = this.valueTodo;
                 const NewTodo = {
                     id:Date.now(),
-                    title: strValue,
+                    title:this.valueTodo,
                     completed:false,
                 }
                 this.$emit('addTodo', NewTodo);
