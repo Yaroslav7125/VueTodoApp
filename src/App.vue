@@ -68,13 +68,12 @@ export default {
     },
   },
   mounted: function () {
-    this.$nextTick(function () {
-
+    {
       if (JSON.parse(localStorage.getItem("todos"))) {
         this.todos = JSON.parse(localStorage.getItem("todos"));// читаем
       }
       else localStorage.setItem('todos', JSON.stringify(this.todos));
-    })
+    }
   }
 }
 
