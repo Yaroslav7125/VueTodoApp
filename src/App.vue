@@ -2,7 +2,7 @@
   <div id="app">
     <h1>My todo list!</h1>
     <AddTodo
-        v-bind:searchWord="userInput"
+        userInput="userInput"
         v-on:editSearchWord="userInput = $event"
         v-on:addTodo='PushTodo'
     />

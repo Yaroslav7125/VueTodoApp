@@ -3,14 +3,14 @@
             <div class="container-inner">
                 <input class='form-control' type="text" v-model='valueTodo'>
                 <button v-on:click='makeTodo' class="btn btn-warning">Add</button>
-                 <input class='form-control form-control-search' :title='searchWord' @input="$emit('editSearchWord', $event.target.value)" placeholder="Search..."  type="text" >
+                 <input class='form-control form-control-search' :title='userInput' @input="$emit('editSearchWord', $event.target.value)" placeholder="Search..." type="text" >
             </div>
     </div>
 </template>
 <script>
 export default{
   props:{
-    searchWord:String,
+    userInput:String,
   },
   data(){
         return{
