@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      todosArr: [
+      todos: [
         { id:1,title:'купить хлеп', completed: false},
         { id:2,title:'купить матрас', completed: false},
         { id:3,title:'купить сено', completed: false},
@@ -37,23 +37,22 @@ export default {
   },
   methods: {
     SetToLocalStorage() {
-      localStorage.setItem('todosArr', JSON.stringify(this.todosArr));
+      localStorage.setItem('todosArr', JSON.stringify(this.todos));
     },
     PushTodo(newTodo) {
-      this.todosArr.push(newTodo);
+      this.todos.push(newTodo);
       this.SetToLocalStorage() // сетим в local Storage
     },
     deleteTodo(id) {
-      this.todosArr = this.todosArr.filter(t => t.id !== id);
+      this.todos = this.todos.filter(t => t.id !== id);
       this.SetToLocalStorage(); //сетим в local Storage
     },
-
     ChangeTodoCompleted(index) {
-      this.todosArr[index].completed = !this.todosArr[index].completed;
+      this.todos[index].completed = !this.todos[index].completed;
       this.SetToLocalStorage(); // сетим при изм completed
     },
     changeTodoTitle(index, StrTitle){
-      this.todosArr[index].title = StrTitle;
+      this.todos[index].title = StrTitle;
       this.SetToLocalStorage();// сетим при изменении title
     }
   },
@@ -62,9 +61,9 @@ export default {
     filteredTodos: function () {
 
       if (this.userInput != '') {
-        return this.todosArr.filter(t => t.title.includes(this.userInput))
+        return this.todos.filter(t => t.title.includes(this.userInput))
       } else {
-        return this.todosArr;
+        return this.todos;
       }
     },
   },
