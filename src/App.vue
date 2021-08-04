@@ -2,8 +2,8 @@
   <div id="app">
     <h1>My todo list!</h1>
     <AddTodo
-        v-bind:searchWord="searchWordApp"
-        v-on:editSearchWord="searchWordApp = $event"
+        v-bind:searchWord="userInput"
+        v-on:editSearchWord="userInput = $event"
         v-on:addTodo='PushTodo'
     />
     <TodoList
@@ -32,7 +32,7 @@ export default {
         { id:2,title:'купить матрас', completed: false},
         { id:3,title:'купить сено', completed: false},
       ],
-      searchWordApp: '',
+      userInput: '',
     }
   },
   methods: {
@@ -61,8 +61,8 @@ export default {
   computed: {
     filteredTodos: function () {
 
-      if (this.searchWordApp != '') {
-        return this.todosArr.filter(t => t.title.includes(this.searchWordApp))
+      if (this.userInput != '') {
+        return this.todosArr.filter(t => t.title.includes(this.userInput))
       } else {
         return this.todosArr;
       }
