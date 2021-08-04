@@ -7,7 +7,7 @@
         v-on:addTodo='PushTodo'
     />
     <TodoList
-        v-bind:todos='TheSearchWordApp'
+        v-bind:todos='filteredTodos'
         v-on:deleteTodo="deleteTodo"
         v-on:ChangeTodoCompleted="ChangeTodoCompleted"
         v-on:changeTodoTitle="changeTodoTitle"
@@ -59,7 +59,7 @@ export default {
   },
 
   computed: {
-    TheSearchWordApp: function () {
+    filteredTodos: function () {
 
       if (this.searchWordApp != '') {
         return this.todosArr.filter(t => t.title.includes(this.searchWordApp))
