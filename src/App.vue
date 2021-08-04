@@ -3,7 +3,7 @@
     <h1>My todo list!</h1>
     <AddTodo
         userInput="userInput"
-        v-on:editSearchWord="userInput = $event"
+        v-on:updateUserInput  ="userInput = $event"
         v-on:addTodo='PushTodo'
     />
     <TodoList
