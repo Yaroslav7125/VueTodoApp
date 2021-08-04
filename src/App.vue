@@ -36,24 +36,24 @@ export default {
     }
   },
   methods: {
-    SetToLocalStorage() {
-      localStorage.setItem('todosArr', JSON.stringify(this.todos));
+    saveTodos() {
+      localStorage.setItem('todos', JSON.stringify(this.todos));
     },
     PushTodo(newTodo) {
       this.todos.push(newTodo);
-      this.SetToLocalStorage() // сетим в local Storage
+      this.saveTodos() // сетим в local Storage
     },
     deleteTodo(id) {
       this.todos = this.todos.filter(t => t.id !== id);
-      this.SetToLocalStorage(); //сетим в local Storage
+      this.saveTodos(); //сетим в local Storage
     },
     ChangeTodoCompleted(index) {
       this.todos[index].completed = !this.todos[index].completed;
-      this.SetToLocalStorage(); // сетим при изм completed
+      this.saveTodos(); // сетим при изм completed
     },
     changeTodoTitle(index, StrTitle){
       this.todos[index].title = StrTitle;
-      this.SetToLocalStorage();// сетим при изменении title
+      this.saveTodos();// сетим при изменении title
     }
   },
 
@@ -70,10 +70,10 @@ export default {
   mounted: function () {
     this.$nextTick(function () {
 
-      if (JSON.parse(localStorage.getItem("todosArr"))) {
-        this.todosArr = JSON.parse(localStorage.getItem("todosArr"));// читаем
+      if (JSON.parse(localStorage.getItem("todos"))) {
+        this.todos = JSON.parse(localStorage.getItem("todos"));// читаем
       }
-      else localStorage.setItem('todosArr', JSON.stringify(this.todosArr));
+      else localStorage.setItem('todos', JSON.stringify(this.todos));
     })
   }
 }
