@@ -3,6 +3,7 @@
         <Todo 
         v-for="(todo, index) in todos"
         v-bind:todo='todo'
+        v-bind:key="todo.id"
         v-bind:index='index'
         v-on:deleteTodo="deleteTodo"
         v-on:changeTodoTitle="changeTodoTitle"
