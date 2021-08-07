@@ -7,7 +7,7 @@
         v-bind:index='index'
         v-on:deleteTodo="deleteTodo"
         v-on:changeTodoTitle="changeTodoTitle"
-        v-on:ChangeTodoCompleted="ChangeTodoCompleted"
+        v-on:changeTodoCompleted="changeTodoCompleted"
         />
     </div>
 </template>
@@ -17,19 +17,18 @@ import Todo from './Todo.vue'
 export default{
     props:['todos'],
     components:{
-        Todo:Todo
+        Todo:Todo,
     },
     methods:{
       deleteTodo(id){
           this.$emit('deleteTodo', id);
       },
-      changeTodoTitle(index, StrTitle){
-                                              ///
-          this.$emit('changeTodoTitle', index, StrTitle);
+      changeTodoTitle(index, strTitle){
+          this.$emit('changeTodoTitle', index, strTitle);
       },
-      ChangeTodoCompleted(index){
-          this.$emit('ChangeTodoCompleted', index);
-      }
+      changeTodoCompleted(index){
+          this.$emit('changeTodoCompleted', index);
+      },
     },
 }
 </script>

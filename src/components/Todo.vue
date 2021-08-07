@@ -3,10 +3,10 @@
         <div class="container-inner">
                 <input v-bind:checked="todo.completed" class="checkbox" v-on:click='changeCompleted' type="checkbox" >
             <h2 v-bind:class='{done: this.todo.completed}' v-if='!editTodo'>
-                 {{(index+1) + ' '+ todo.title}}
+                 {{(index+1) + ' ' + todo.title}}
             </h2>
-            <input class='form-control' v-bind:value="todo.title" v-else type="text" v-on:input="changeTodoTitle($event.target.value) " >
-            <button class="btn btn-primary" v-on:click="ChangeEditTodos()">Edit</button>
+            <input class='form-control' v-bind:value="todo.title" v-else type="text" v-on:input="changeTodoTitle($event.target.value)" >
+            <button class="btn btn-primary" v-on:click="changeEditTodos()">Edit</button>
             <button v-on:click='deleteTodo' class="btn btn-outline-dark">X</button>
         </div>
     </div>
@@ -21,15 +21,15 @@ export default{
         }
     },
     methods:{
-        ChangeEditTodos(){
+        changeEditTodos(){
           this.editTodo= !this.editTodo;
-          this.$emit('ChangeTodo');
+          this.$emit('changeTodo');
         }, 
         changeCompleted(){
-          this.$emit('ChangeTodoCompleted', this.index);
+          this.$emit('changeTodoCompleted', this.index);
         },
-        changeTodoTitle(StrTitle){
-          this.$emit('changeTodoTitle', this.index, StrTitle)
+        changeTodoTitle(strTitle){
+          this.$emit('changeTodoTitle', this.index, strTitle)
         },
         deleteTodo(){
           this.$emit('deleteTodo', this.todo.id)

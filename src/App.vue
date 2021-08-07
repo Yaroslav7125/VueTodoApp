@@ -9,7 +9,7 @@
     <TodoList
         v-bind:todos='filteredTodos'
         v-on:deleteTodo="deleteTodo"
-        v-on:ChangeTodoCompleted="ChangeTodoCompleted"
+        v-on:changeTodoCompleted="changeTodoCompleted"
         v-on:changeTodoTitle="changeTodoTitle"
     />
   </div>
@@ -47,7 +47,7 @@ export default {
       this.todos = this.todos.filter(t => t.id !== id);
       this.saveTodos(); //сетим в local Storage
     },
-    ChangeTodoCompleted(index) {
+    changeTodoCompleted(index) {
       this.todos[index].completed = !this.todos[index].completed;
       this.saveTodos(); // сетим при изм completed
     },

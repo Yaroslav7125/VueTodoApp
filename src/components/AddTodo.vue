@@ -3,7 +3,7 @@
             <div class="container-inner">
                 <input class='form-control' type="text" v-model='valueTodo'>
                 <button v-on:click='createTodo' class="btn btn-warning">Add</button>
-                 <input class='form-control form-control-search' :title='userInput' @input="$emit('updateUserInput', $event.target.value)" placeholder="Search..." type="text" >
+                <input class='form-control form-control-search' :title='userInput' @input="$emit('updateUserInput', $event.target.value)" placeholder="Search..." type="text" >
             </div>
     </div>
 </template>
@@ -20,12 +20,12 @@ export default{
   methods:{
         createTodo(){
             if(this.valueTodo){
-                const NewTodo = {
+                const newTodo = {
                     id:Date.now(),
                     title:this.valueTodo,
                     completed:false,
                 }
-                this.$emit('addTodo', NewTodo);
+                this.$emit('addTodo', newTodo);
             } 
             this.valueTodo='';
         },
